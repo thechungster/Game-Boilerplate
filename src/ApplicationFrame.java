@@ -6,12 +6,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class ApplicationFrame extends JPanel implements KeyListener, MouseListener, Runnable {
+
+    private PlayArea pong;
     public static final int WIDTH = 1200;
     public static final int HEIGHT = 800;
-
-    private Point center;
-    private double time;
-
     public ApplicationFrame() {
         // enable double buffering so there's no flickering
         setDoubleBuffered(true);
@@ -25,29 +23,19 @@ public class ApplicationFrame extends JPanel implements KeyListener, MouseListen
     private void update() {
         // logic goes here
         // this is run every tick
-
-        time += 0.01;
+        pong.update();
     }
 
     private void render(Graphics g) {
         // rendering goes here
         // this is run every tick
-
-        g.setColor(new Color(0x2b2b2b));
-        g.fillRect(0, 0, WIDTH, HEIGHT);
-
-        int x = (int) Math.round(center.x + Math.cos(time) * WIDTH / 3.0);
-        int y = (int) Math.round(center.y + Math.sin(time) * HEIGHT / 3.0);
-
-        g.setColor(new Color(0xffffff));
-        g.fillRect(x - 2, y - 2, 4, 4);
+        pong.render(g);
     }
 
     private void initialize() {
         // this method is called before the game loop begins so that variables can be initialized
-
-        center = new Point(WIDTH / 2, HEIGHT / 2);
-        time = 0;
+        pong = new PlayArea();
+        pong.intialize();
     }
 
     @Override
@@ -63,11 +51,17 @@ public class ApplicationFrame extends JPanel implements KeyListener, MouseListen
     @Override
     public void keyPressed(KeyEvent e) {
         // this method is called when a key is pressed
+        if(e.getKeyCode() == 38 || e.getKeyCode() == 40){// up key
+            pong.keyPressed(e.getKeyCode());
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         // this method is called when a key is released
+        if(e.getKeyCode() == 38 || e.getKeyCode() == 40){// up key
+            pong.keyReleased(e.getKeyCode());
+        }
     }
 
     @Override

@@ -14,8 +14,8 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.addKeyListener(applicationFrame);
         frame.addMouseListener(applicationFrame);
-        frame.setSize(new Dimension(ApplicationFrame.WIDTH, ApplicationFrame.HEIGHT));
-        frame.setPreferredSize(new Dimension(ApplicationFrame.WIDTH, ApplicationFrame.HEIGHT));
+        frame.setSize(new Dimension(1500, 1000));
+        frame.setPreferredSize(new Dimension(1500, 1000));
         frame.setVisible(true);
     }
 }
